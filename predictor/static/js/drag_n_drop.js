@@ -52,6 +52,15 @@ $.fn.dragAndDrop = function(p){
 
     $this.find('input[type="file"]').on('change',function(){
       fd = new FormData();
+        var file = $(this)[0].files[0];
+        var reader = new FileReader();
+        reader.onload = function() {
+            var aud = new Audio(reader.result);
+            aud.onloadedmetadata = function(){
+                fd.append('duration', aud.duration);
+            };
+        };
+        reader.readAsDataURL(file);
       fd.append('data', $(this)[0].files[0]);
       upload(fd);
     });
@@ -94,7 +103,7 @@ $.fn.dragAndDrop = function(p){
         }
 
         $('.progress').removeClass('hide');
-        
+
         upload(fd);
       }
     });
@@ -106,6 +115,7 @@ $('#dnd').dragAndDrop({
     $('#dnd .start, #dnd .error,#dnd .progress').hide();
     $('#dnd .done').show();
     console.info(msg);
+    // $('#loader').removeClass('hide');
   },
   'error' : function(){
     $('#dnd .start,#dnd .done,#dnd .progress').hide();

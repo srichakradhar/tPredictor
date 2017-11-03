@@ -22,7 +22,7 @@ def index(request):
 @csrf_exempt
 def use_case_2(request):
     if request.is_ajax():
-        # import pdb; pdb.set_trace()
+        import pdb; pdb.set_trace()
         return  JsonResponse({})
     else:
         return render(request, "use_case_2.html")
