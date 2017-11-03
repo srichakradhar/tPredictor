@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <link href="{% static 'css/drag_n_drop.css' %}" rel="stylesheet">
+    <div class="jumbotron">
+
+        <h3>Activity Recognition <span>from video</span></h3>
+
+        <p>This example is a quick illustration of the results obtained from
+            training a deep learning model on a number of videos to detect the actions.
+             To see the results, upload a video and click "Analyze".</p>
+
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <!-- <form class="form-inline" role="form" id="model1_form" method='post'>
+                {% csrf_token %}
+                <div class="col-xs-3 form-group" >
+
+                      <label for="upload_video">Upload Video</label>
+                      <input type="file" id="upload_video">
+                      <p class="help-block">To see the results, click "Analyze".</p>
+
+                </div>
+            </form> -->
+            <div id="dnd">
+                <form enctype="multipart/form-data" method="post">
+                    <div class="dnd-container">
+                        <div class="start"></div>
+                        <div class="done"></div>
+                        <div class="error"></div>
+                        <progress max="100" value="50"></progress>
+                    </div>
+                    <p>Import a sound file in MP3 format (max size: MB)</p>
+                    <button class="dndAlternative">Browse</button>
+                    <input type="file" name="upload" >
+                </form>
+            </div>
+        </div>
+
+        <div class="form-group-lg">
+            <button type="submit" class="btn btn-lg btn-primary" id="analyze_button">Analyze</button>
+        </div>
+
+        <!-- <div class="form-group" >
+
+            <label for="acct_assignment_cats" class="col-sm-2 control-label" text-align:"right">Acct Assignment Cat:</label>
+            <div class="col-sm-4">
+                <select id="acct_assignment_cats" class="form-control select select-primary select-block mbl select-lg">
+                    <option value="hide">Acct Assignment Cat</option>
+                </select>
+            </div>
+
+
+            <label for="order_units" class="col-sm-2 control-label" text-align:"right">Order Unit:</label>
+            <div class="col-sm-4">
+                <select id="order_units" class="form-control select select-primary select-block mbl select-lg">
+                    <option value="hide">Order Unit</option>
+                </select>
+            </div>
+
+        </div> -->
+
+        <table  id="results" style="width:100%">
+            <tr>
+                <th>Acct Assignment Cat</th>
+                <th>Order Unit</th>
+            </tr>
+        </table>
+
+    </div>
+    <script type="text/javascript" src="{% static 'js/drag_n_drop.js' %}"></script>
+{% endblock%}

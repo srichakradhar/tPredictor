@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="jumbotron">
+
+        <h3>Material Group Prediction <span>from sales data</span></h3>
+
+        <p>This example is a quick illustration of the results obtained from
+            training a deep learning model on the material group data.
+             To see the results, just select any of the groups below and click "Predict".</p>
+
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <form class="form-inline" role="form" id="model1_form" method='post'>
+                {% csrf_token %}
+                <div class="col-xs-3 form-group" >
+
+                    <label class="sr-only" for="acct_assignment_cats">Acct Assignment Cat:</label>
+                    <select id="acct_assignment_cats" class="form-control select select-primary select-block mbl select-lg">
+                        <option value="hide">Acct Assignment Cat</option>
+                    </select>
+                </div>
+
+                <div class="col-xs-3 form-group" >
+                    <label class="sr-only" for="order_units">Order Unit:</label>
+                    <select id="order_units" class="form-control select select-primary select-block mbl select-lg">
+                        <option value="hide">Order Unit</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-4 form-group-lg">
+                    <button type="submit" class="btn btn-lg btn-primary" id="predict_button">Predict</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- <div class="form-group" >
+
+            <label for="acct_assignment_cats" class="col-sm-2 control-label" text-align:"right">Acct Assignment Cat:</label>
+            <div class="col-sm-4">
+                <select id="acct_assignment_cats" class="form-control select select-primary select-block mbl select-lg">
+                    <option value="hide">Acct Assignment Cat</option>
+                </select>
+            </div>
+
+
+            <label for="order_units" class="col-sm-2 control-label" text-align:"right">Order Unit:</label>
+            <div class="col-sm-4">
+                <select id="order_units" class="form-control select select-primary select-block mbl select-lg">
+                    <option value="hide">Order Unit</option>
+                </select>
+            </div>
+
+        </div> -->
+
+        <table  id="results" style="width:100%">
+            <tr>
+                <th>Acct Assignment Cat</th>
+                <th>Order Unit</th>
+            </tr>
+        </table>
+
+    </div>
+
+{% endblock%}

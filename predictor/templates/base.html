@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+<title>DL Predictor</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Loading Bootstrap -->
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+<!-- Loading Flat UI -->
+<link href="{% static 'css/flat-ui.min.css' %}" rel="stylesheet">
+
+<link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+<!--[if lt IE 9]>
+  <script src="{% static 'js/html5shiv.js' %}"></script>
+  <script src="{% static 'js/respond.min.js' %}"></script>
+<![endif]-->
+<link rel="stylesheet" href="{% static 'css/show_results.css' %}">
+
+</head>
+
+<body>
+    <!-- Static navbar -->
+    <div class="navbar navbar-inverse navbar-embossed navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+          </button>
+          <a class="navbar-brand" href="#"><img src="http://flaticons.net/gd/makefg.php?i=icons/Brand%20Identity/TATA-01.png&r=255&g=255&b=255"/></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/">Use Case 1</a></li>
+            <li><a href="/use_case_2/">Use Case 2</a></li>
+            <li><a href="/use_case_3/">Use Case 3</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Use Case 4</a></li>
+                <li><a href="#">Use Case 5</a></li>
+                <li><a href="#">Use Case 6</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <!-- <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="../navbar/">Default</a></li>
+            <li><a href="./">Static top</a></li>
+          </ul> -->
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="{% static 'js/flat-ui.min.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'js/show_results.js' %}"></script>
+
+    <div class="container">
+        <div id='loader' class="loading-mask loading-mask--picture hide"></div>
+        {% block content %} {% endblock %}
+    </div>
+
+</body>
+</html>
