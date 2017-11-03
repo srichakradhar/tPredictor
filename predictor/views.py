@@ -1,6 +1,7 @@
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.http import JsonResponse
 from django.shortcuts import render
+from settings import BASE_DIR
 from predictor.models import *
 import pandas as pd
 import numpy as np
@@ -18,8 +19,13 @@ from keras import metrics
 def index(request):
     return render(request, "index.html")
 
-def use_case_2(request):    
-    return render(request, "use_case_2.html")
+@csrf_exempt
+def use_case_2(request):
+    if request.is_ajax():
+        # import pdb; pdb.set_trace()
+        return  JsonResponse({})
+    else:
+        return render(request, "use_case_2.html")
 
 def use_case_3(request):
     return render(request, "index.html")
@@ -52,7 +58,7 @@ def predict(request):
         print(user_data)
         data_df = pd.DataFrame([data_dict])
         with K.get_session().graph.as_default() as g:
-            my_model = load_model('/home/tcs/po_model1_saved.h5')
+            my_model = load_model(BASE_DIR + '/po_model1_saved.h5')
             result = my_model.predict(data_df.values)
             output = result.tolist()[0]
         return JsonResponse({'ZCS0100': output[0], 'ZCS0500': output[1], 'ZIS1200': output[2]})

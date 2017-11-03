@@ -1,10 +1,10 @@
 $.fn.dragAndDrop = function(p){
   var parameters = {
     'supported' : ['audio/wav','audio/mp3', 'video/mp4'],
-    'size' : 5,
-    'uploadFile' : 'upload.php',
-    'sizeAlert' : 'File too heavy',
-    'formatAlert' : 'Format not supported',
+    'size' : 24,
+    'uploadFile' : '/use_case_2/',
+    'sizeAlert' : 'File size exceeded the limit!',
+    'formatAlert' : 'File format not supported!',
     'done' : function (msg) {
       console.info('upload done');
     },
@@ -36,7 +36,9 @@ $.fn.dragAndDrop = function(p){
         }, false);
         return xhr;
       },
-    }).done(parameters.done).error(parameters.error);
+      error: parameters.error,
+  }).done(parameters.done);
+
   }
 
   this.each(function(){
@@ -44,6 +46,7 @@ $.fn.dragAndDrop = function(p){
 
     $this.find('.dndAlternative').on('click',function(e){
       e.preventDefault();
+      $('#file_upload_error').html('');
       $this.find('input[type="file"]').trigger('click');
     });
 
@@ -70,6 +73,8 @@ $.fn.dragAndDrop = function(p){
       drop : function(e){
         e.preventDefault();
 
+        $('#file_upload_error').html('');
+
         $this.removeClass('hover');
 
         var files = e.originalEvent.dataTransfer.files;
@@ -78,15 +83,18 @@ $.fn.dragAndDrop = function(p){
         fd.append('data', files[0]);
 
         if($.inArray(files[0].type,parameters.supported) < 0){
-          alert(parameters.formatAlert);
+            $('#file_upload_error').html('<div class="alert alert-danger alert-dismissable fade in"><a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>' + parameters.formatAlert + '</strong></div>');
+        //   alert(parameters.formatAlert);
           return false;
         }
 
         if(files[0].size > parameters.size*1038336 ){
-          alert(parameters.sizeAlert);
+          $('#file_upload_error').html('<div class="alert alert-danger alert-dismissable fade in"><a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>' + parameters.sizeAlert + '</strong></div>');
           return false;
         }
 
+        $('.progress').removeClass('hide');
+        
         upload(fd);
       }
     });
@@ -95,16 +103,16 @@ $.fn.dragAndDrop = function(p){
 
 $('#dnd').dragAndDrop({
   'done' : function(msg){
-    $('#dnd .start, #dnd .error,#dnd progress').hide();
+    $('#dnd .start, #dnd .error,#dnd .progress').hide();
     $('#dnd .done').show();
     console.info(msg);
   },
   'error' : function(){
-    $('#dnd .start,#dnd .done,#dnd progress').hide();
+    $('#dnd .start,#dnd .done,#dnd .progress').hide();
     $('.error').show();
   },
   'onProgress' : function(p){
     $('#dnd .start,#dnd .done,#dnd .error').hide();
-    $('#dnd progress').show().val(Math.round(p * 100));
+    $('.progress-bar').width(Math.round(p * 100) + '%');
   }
 });

@@ -23,6 +23,10 @@
                       <p class="help-block">To see the results, click "Analyze".</p>
 
                 </div>
+
+                <div class="form-group-lg text-center">
+                    <button type="submit" class="btn btn-lg btn-primary" id="analyze_button">Analyze</button>
+                </div>
             </form> -->
             <div id="dnd">
                 <form enctype="multipart/form-data" method="post">
@@ -30,17 +34,19 @@
                         <div class="start"></div>
                         <div class="done"></div>
                         <div class="error"></div>
-                        <progress max="100" value="50"></progress>
+                        <div class="progress hide">
+                            <div class="progress-bar"></div>
+                        </div>
                     </div>
-                    <p>Import a sound file in MP3 format (max size: MB)</p>
+                    <p>Drop a video file in MP4 format (max size: 24MB)</p>
+                    <p><i>or</i></p>
                     <button class="dndAlternative">Browse</button>
                     <input type="file" name="upload" >
                 </form>
             </div>
         </div>
 
-        <div class="form-group-lg">
-            <button type="submit" class="btn btn-lg btn-primary" id="analyze_button">Analyze</button>
+        <div id="file_upload_error">
         </div>
 
         <!-- <div class="form-group" >
